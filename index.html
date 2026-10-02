@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatorio Direto 🛴</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Relatorio do Dia</h1>
+    <h2>Zonas</h2>
+    <div id="lista-zonas"></div>
+
+   <div id="painel-zona" hidden>
+        <h2 id="titulo-zona"></h2>
+        <div id="lista-tarefas"></div>
+        <textarea id="observacao" placeholder="Observação (opcional)"></textarea>
+        <button id="btn-guardar">Guardar zona</button>
+    </div>
+
+    <h2>Relatório</h2>
+    <button id="btn-gerar">Gerar relatório</button>
+    <textarea id="texto-relatorio" rows="10" placeholder="O relatório aparece aqui"></textarea>
+    <button id="btn-copiar">Copiar</button>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
