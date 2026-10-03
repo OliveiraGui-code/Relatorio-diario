@@ -1,7 +1,7 @@
-const zonas = ["Benfica", "Sete Rios", "Laranjeiras", "Entre Campos", "Alvalade", "Roma", "Areeiro", "Alameda", "Campo Grande", "Almirante Reis", "Indentende", "Martin Moniz", "Rossio", "Avenida", "Restauradores", "Marques Pombal", "Picoas", "Saldanha", "Arco Cego", "Campo Pequeno", "Arroios", "Estafania", "Rato", "São Bento", "Av. General Roçada", "Eduardo VII", "Campolide"];
-const tarefas = ["Organização", "Relógio", "Bateria", "Manutenção", "Rebalance"];
+let zonas = ["Benfica", "Sete Rios", "Laranjeiras","São Sebastião", "Bairro do Rego", "Entre Campos", "Alvalade", "Roma", "Areeiro", "Alameda", "Campo Grande", "Almirante Reis", "Indentende", "Martin Moniz", "Rossio", "Avenida", "Restauradores", "Marques Pombal", "Picoas", "Saldanha", "Arco Cego", "Campo Pequeno", "Arroios", "Estafania", "Rato", "São Bento", "Av. General Roçada", "Eduardo VII", "Campolide"];
+let tarefas = ["Organização", "Relógio", "Bateria", "Manutenção", "Rebalance"];
 
-// guardamos o que foi feito em cada zona
+
 const relatorio = {};
 let zonaAtual = null;
 
@@ -12,7 +12,7 @@ const listaTarefas = document.getElementById("lista-tarefas");
 const campoObservacao = document.getElementById("observacao");
 const btnGuardar = document.getElementById("btn-guardar");
 
-// Cria um botão para cada zona
+
 zonas.forEach(function (zona) {
   const botao = document.createElement("button");
   botao.textContent = zona;
@@ -127,9 +127,28 @@ btnWhatsapp.addEventListener("click", function () {
 });
 
 const CHAVE = "relatorio-diario";
+const CHAVE_ZONAS = "zonas-lista";
+const CHAVE_TAREFAS = "tarefas-lista";
 
 function guardarNoTelemovel() {
   localStorage.setItem(CHAVE, JSON.stringify(relatorio));
+}
+
+function guardarListas() {
+  localStorage.setItem(CHAVE_TAREFAS, JSON.stringify(tarefas));
+  localStorage.setItem(CHAVE_ZONAS, JSON.stringify(zonas));
+}
+
+function carregarListas(){
+  const textoZonas = localStorage.getItem(CHAVE_ZONAS);
+  if (textoZonas !== null) {
+    zonas = JSON.parse(textoZonas);
+  }
+  const textoTarefas = localStorage.getItem(CHAVE_TAREFAS);
+  if (textoTarefas !== null) {
+    zonas = JSON.parse(textoTarefas);
+  }
+
 }
 
 function carregarDoTelemovel() {
