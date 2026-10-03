@@ -8,16 +8,21 @@
 </head>
 
 <body>
-    <h1>Relatorio do Dia</h1>
-    <h2>Zonas</h2>
-    <div id="lista-zonas"></div>
+    <h1>Rota do dia</h1>
+        <div id="area-principal">
+        <div id="coluna-zonas">
+            <h2>Zonas:</h2>
+            <div id="lista-zonas"></div>
+        </div>
 
-   <div id="painel-zona" hidden>
-        <h2 id="titulo-zona"></h2>
-        <div id="lista-tarefas"></div>
-        <textarea id="observacao" placeholder="Observação (opcional)"></textarea>
-        <button id="btn-guardar">Guardar zona</button>
+            <div id="painel-zona" hidden>
+            <h2 id="titulo-zona"></h2>
+            <div id="lista-tarefas"></div>
+            <textarea id="observacao" placeholder="Observação (Opcional)"></textarea>
+            <button id="btn-guardar">Guardar</button>
+        </div>
     </div>
+
 
     <h2>Relatório</h2>
     <button id="btn-gerar">Gerar relatório</button>
@@ -25,8 +30,6 @@
     <button id="btn-copiar">Copiar</button>
     <button id="btn-whatsapp">Enviar por WhatsApp</button>
     <button id="btn-limpar">Limpar dia</button>
-    
-
 
     <script src="app.js"></script>
 
