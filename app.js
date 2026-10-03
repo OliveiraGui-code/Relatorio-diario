@@ -109,3 +109,17 @@ btnCopiar.addEventListener("click", function () {
     }, 1500);
   });
 });
+
+const btnWhatsapp = document.getElementById("btn-whatsapp");
+
+btnWhatsapp.addEventListener("click", function () {
+  const texto = textoRelatorio.value.trim();
+
+  if (texto === "" || texto === "Nenhuma zona guardada ainda.") {
+    alert("Gere o relatório primeiro.");
+    return;
+  }
+
+  const url = "https://wa.me/?text=" + encodeURIComponent(texto);
+  window.open(url, "_blank");
+});
