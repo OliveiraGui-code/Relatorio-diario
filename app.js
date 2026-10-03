@@ -56,6 +56,8 @@ btnGuardar.addEventListener("click", function () {
     observacao: campoObservacao.value.trim(),
   };
 
+  guardarNoTelemovel();
+
   // Marca o botão da zona como feita
   const botaoZona = document.querySelector('[data-zona="' + zonaAtual + '"]');
   botaoZona.classList.add("feita");
@@ -122,4 +124,48 @@ btnWhatsapp.addEventListener("click", function () {
 
   const url = "https://wa.me/?text=" + encodeURIComponent(texto);
   window.open(url, "_blank");
+});
+
+const CHAVE = "relatorio-diario";
+
+function guardarNoTelemovel() {
+  localStorage.setItem(CHAVE, JSON.stringify(relatorio));
+}
+
+function carregarDoTelemovel() {
+  const texto = localStorage.getItem(CHAVE);
+  if (texto === null) {
+    return; 
+  }
+
+  Object.assign(relatorio, JSON.parse(texto));
+
+  
+  Object.keys(relatorio).forEach(function (zona) {
+    const botaoZona = document.querySelector('[data-zona="' + zona + '"]');
+    if (botaoZona) {
+      botaoZona.classList.add("feita");
+    }
+  });
+}
+
+carregarDoTelemovel();
+
+const btnLimpar = document.getElementById("btn-limpar");
+
+btnLimpar.addEventListener("click", function () {
+  if (!confirm("Apagar todas as zonas de hoje?")) {
+    return;
+  }
+
+  Object.keys(relatorio).forEach(function (zona) {
+    delete relatorio[zona];
+  });
+  localStorage.removeItem(CHAVE);
+
+  document.querySelectorAll("button.feita").forEach(function (b) {
+    b.classList.remove("feita");
+  });
+  textoRelatorio.value = "";
+  painel.hidden = true;
 });
