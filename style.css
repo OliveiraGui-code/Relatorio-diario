@@ -53,3 +53,16 @@ overflow-y: auto;
   padding: 8px;
   font-size: 15px;
 }
+
+.linha-zona {
+  display: flex;
+  gap: 6px;
+}
+
+.linha-zona button:first-child {
+  flex: 1;
+}
+
+.linha-zona button:not(:first-child) {
+  width: 44px;
+}

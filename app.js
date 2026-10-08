@@ -1,6 +1,6 @@
 let zonas = ["Benfica", "Sete Rios", "Laranjeiras","São Sebastião", "Bairro do Rego", "Entre Campos", "Alvalade", "Roma", "Areeiro", "Alameda", "Campo Grande", "Almirante Reis", "Indentende", "Martin Moniz", "Rossio", "Avenida", "Restauradores", "Marques Pombal", "Picoas", "Saldanha", "Arco Cego", "Campo Pequeno", "Arroios", "Estafania", "Rato", "São Bento", "Av. General Roçada", "Eduardo VII", "Campolide"];
 let tarefas = ["Organização", "Relógio", "Bateria", "Manutenção", "Rebalance"];
-
+let modoEdicao = false;
 
 const relatorio = {};
 let zonaAtual = null;
@@ -16,17 +16,36 @@ const btnAddZona = document.getElementById("btn-add-zona");
 
 function desenharZonas(){
   listaZonas.innerHTML = "";
+  
 zonas.forEach(function (zona) {
+  const linha = document.createElement("div");
+  linha.className = "linha-zona";
+
   const botao = document.createElement("button");
   botao.textContent = zona;
   botao.dataset.zona = zona;
   botao.addEventListener("click", function () {
     abrirZona(zona);
   });
-  listaZonas.appendChild(botao);
+
+  if (relatorio[zona]) {
+    botao.classList.add("feita");
+  }
+  linha.appendChild(botao);
+  
+  if (modoEdicao === true) {
+    const btnRenomear = document.createElement("button");
+    btnRenomear.textContent = "✏️";
+    linha.appendChild(btnRenomear);
+
+    const btnApagar = document.createElement("button");
+    btnApagar.textContent = "✕";
+    linha.appendChild(btnApagar);
+  }
+
+  listaZonas.appendChild(linha);
 });
 }
-desenharZonas();
 
 function abrirZona(zona) {
   zonaAtual = zona;
@@ -214,7 +233,8 @@ btnAddZona.addEventListener("click", function(){
 
 });
 
-let modoEdicao = false;
+desenharZonas()
+
 const btnEditar = document.getElementById("btn-editar");
 
 btnEditar.addEventListener("click", function (){
@@ -225,4 +245,10 @@ btnEditar.addEventListener("click", function (){
   } else {
     btnEditar.textContent = "Editar ✏️";
   }
+  desenharZonas()
 });
+
+
+
+// reparei que quando eu atualizo a pagina, ela perde a zona que eu add
+
