@@ -5,6 +5,10 @@ let modoEdicao = false;
 const relatorio = {};
 let zonaAtual = null;
 
+const CHAVE = "relatorio-diario";
+const CHAVE_ZONAS = "zonas-lista";
+const CHAVE_TAREFAS = "tarefas-lista";
+
 const listaZonas = document.getElementById("lista-zonas");
 const painel = document.getElementById("painel-zona");
 const titulo = document.getElementById("titulo-zona");
@@ -13,38 +17,57 @@ const campoObservacao = document.getElementById("observacao");
 const btnGuardar = document.getElementById("btn-guardar");
 const Novazona = document.getElementById("nova-zona"); 
 const btnAddZona = document.getElementById("btn-add-zona"); 
+const btnEditar = document.getElementById("btn-editar");
+const btnGerar = document.getElementById("btn-gerar");
+const btnCopiar = document.getElementById("btn-copiar");
+const textoRelatorio = document.getElementById("texto-relatorio");
+const btnWhatsapp = document.getElementById("btn-whatsapp");
+const btnLimpar = document.getElementById("btn-limpar");
 
 function desenharZonas(){
   listaZonas.innerHTML = "";
   
-zonas.forEach(function (zona) {
-  const linha = document.createElement("div");
-  linha.className = "linha-zona";
+  zonas.forEach(function (zona) {
+    const linha = document.createElement("div");
+    linha.className = "linha-zona";
 
-  const botao = document.createElement("button");
-  botao.textContent = zona;
-  botao.dataset.zona = zona;
-  botao.addEventListener("click", function () {
-    abrirZona(zona);
+    const botao = document.createElement("button");
+    botao.textContent = zona;
+    botao.dataset.zona = zona;
+    botao.addEventListener("click", function () {
+      abrirZona(zona);
+    });
+
+    if (relatorio[zona]) {
+      botao.classList.add("feita");
+    }
+    linha.appendChild(botao);
+    
+    if (modoEdicao === true) {
+      const btnRenomear = document.createElement("button");
+      btnRenomear.textContent = "✏️";
+      linha.appendChild(btnRenomear);
+
+      const btnApagar = document.createElement("button");
+      btnApagar.textContent = "✕";
+
+      // CORRIGIDO: o seu bloco do apagar agora está AQUI, dentro do desenharZonas
+      btnApagar.addEventListener("click", function (){
+        if (!confirm("apagar " + zona + " da lista?")){
+          return;
+        }
+        zonas = zonas.filter(function (z){
+          return z !== zona;
+        });
+        guardarListas();
+        desenharZonas();
+      });
+
+      linha.appendChild(btnApagar);
+    }
+
+    listaZonas.appendChild(linha);
   });
-
-  if (relatorio[zona]) {
-    botao.classList.add("feita");
-  }
-  linha.appendChild(botao);
-  
-  if (modoEdicao === true) {
-    const btnRenomear = document.createElement("button");
-    btnRenomear.textContent = "✏️";
-    linha.appendChild(btnRenomear);
-
-    const btnApagar = document.createElement("button");
-    btnApagar.textContent = "✕";
-    linha.appendChild(btnApagar);
-  }
-
-  listaZonas.appendChild(linha);
-});
 }
 
 function abrirZona(zona) {
@@ -90,10 +113,6 @@ btnGuardar.addEventListener("click", function () {
   console.log(relatorio);
 });
 
-const btnGerar = document.getElementById("btn-gerar");
-const btnCopiar = document.getElementById("btn-copiar");
-const textoRelatorio = document.getElementById("texto-relatorio");
-
 function montarLinha(zona, dados) {
   let linha = zona;
 
@@ -136,8 +155,6 @@ btnCopiar.addEventListener("click", function () {
   });
 });
 
-const btnWhatsapp = document.getElementById("btn-whatsapp");
-
 btnWhatsapp.addEventListener("click", function () {
   const texto = textoRelatorio.value.trim();
 
@@ -149,10 +166,6 @@ btnWhatsapp.addEventListener("click", function () {
   const url = "https://wa.me/?text=" + encodeURIComponent(texto);
   window.open(url, "_blank");
 });
-
-const CHAVE = "relatorio-diario";
-const CHAVE_ZONAS = "zonas-lista";
-const CHAVE_TAREFAS = "tarefas-lista";
 
 function guardarNoTelemovel() {
   localStorage.setItem(CHAVE, JSON.stringify(relatorio));
@@ -170,9 +183,8 @@ function carregarListas(){
   }
   const textoTarefas = localStorage.getItem(CHAVE_TAREFAS);
   if (textoTarefas !== null) {
-    zonas = JSON.parse(textoTarefas);
+    tarefas = JSON.parse(textoTarefas); // CORRIGIDO: estava "zonas ="
   }
-
 }
 
 function carregarDoTelemovel() {
@@ -182,19 +194,7 @@ function carregarDoTelemovel() {
   }
 
   Object.assign(relatorio, JSON.parse(texto));
-
-  
-  Object.keys(relatorio).forEach(function (zona) {
-    const botaoZona = document.querySelector('[data-zona="' + zona + '"]');
-    if (botaoZona) {
-      botaoZona.classList.add("feita");
-    }
-  });
 }
-
-carregarDoTelemovel();
-
-const btnLimpar = document.getElementById("btn-limpar");
 
 btnLimpar.addEventListener("click", function () {
   if (!confirm("Apagar todas as zonas de hoje?")) {
@@ -233,10 +233,6 @@ btnAddZona.addEventListener("click", function(){
 
 });
 
-desenharZonas()
-
-const btnEditar = document.getElementById("btn-editar");
-
 btnEditar.addEventListener("click", function (){
   modoEdicao = !modoEdicao; //o "!" significa que é "não" ou "o contrario de"
  
@@ -245,10 +241,13 @@ btnEditar.addEventListener("click", function (){
   } else {
     btnEditar.textContent = "Editar ✏️";
   }
-  desenharZonas()
+  desenharZonas();
 });
 
-
+// CHAMADAS FINAIS (sempre no fim, nesta ordem)
+carregarListas();
+carregarDoTelemovel();
+desenharZonas();
 
 // reparei que quando eu atualizo a pagina, ela perde a zona que eu add
 
