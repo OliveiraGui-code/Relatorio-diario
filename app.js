@@ -11,8 +11,11 @@ const titulo = document.getElementById("titulo-zona");
 const listaTarefas = document.getElementById("lista-tarefas");
 const campoObservacao = document.getElementById("observacao");
 const btnGuardar = document.getElementById("btn-guardar");
+const Novazona = document.getElementById("nova-zona"); 
+const btnAddZona = document.getElementById("btn-add-zona"); 
 
-
+function desenharZonas(){
+  listaZonas.innerHTML = "";
 zonas.forEach(function (zona) {
   const botao = document.createElement("button");
   botao.textContent = zona;
@@ -22,6 +25,8 @@ zonas.forEach(function (zona) {
   });
   listaZonas.appendChild(botao);
 });
+}
+desenharZonas();
 
 function abrirZona(zona) {
   zonaAtual = zona;
@@ -187,4 +192,24 @@ btnLimpar.addEventListener("click", function () {
   });
   textoRelatorio.value = "";
   painel.hidden = true;
+});
+
+btnAddZona.addEventListener("click", function(){
+  const texto = Novazona.value.trim();
+
+  if (texto === "") {
+    alert("Escreva o nome da zona");
+    return;
+  }
+
+  if (zonas.includes(texto)) {
+    alert("Essa zona já existe!!");
+    return;
+  }
+
+  zonas.push(texto);
+  guardarListas();
+  desenharZonas();
+  Novazona.value = "";
+
 });
