@@ -213,3 +213,16 @@ btnAddZona.addEventListener("click", function(){
   Novazona.value = "";
 
 });
+
+let modoEdicao = false;
+const btnEditar = document.getElementById("btn-editar");
+
+btnEditar.addEventListener("click", function (){
+  modoEdicao = !modoEdicao; //o "!" significa que é "não" ou "o contrario de"
+ 
+  if (modoEdicao === true) {
+    btnEditar.textContent = "Concluir";
+  } else {
+    btnEditar.textContent = "Editar ✏️";
+  }
+});
