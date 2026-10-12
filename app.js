@@ -46,6 +46,26 @@ function desenharZonas(){
     if (modoEdicao === true) {
       const btnRenomear = document.createElement("button");
       btnRenomear.textContent = "✏️";
+
+      btnRenomear.addEventListener("click", function (){
+        const novoNome = prompt("Novo nome para " + zona + ".", zona);
+
+        if (novoNome === null){
+          return;
+        }
+          const nomeLimpo = novoNome.trim();
+
+           if (nomeLimpo === "" || nomeLimpo === zona) {
+              return;
+            }
+
+            if (zonas.includes(nomeLimpo)) {
+              alert("Essa zona já existe!!");
+                return;
+          }
+          console.log(nomeLimpo);
+      });
+
       linha.appendChild(btnRenomear);
 
       const btnApagar = document.createElement("button");
@@ -250,4 +270,5 @@ carregarDoTelemovel();
 desenharZonas();
 
 // reparei que quando eu atualizo a pagina, ela perde a zona que eu add
-
+// arrumar a box de add o nome da nova zona
+// arrumar os botões de editar as zonas
