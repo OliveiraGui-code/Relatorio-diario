@@ -24,6 +24,8 @@ const textoRelatorio = document.getElementById("texto-relatorio");
 const btnWhatsapp = document.getElementById("btn-whatsapp");
 const btnLimpar = document.getElementById("btn-limpar");
 const btnDesfazer = document.getElementById("btn-desfazer")
+const campoNovaTarefa = document.getElementById("nova-tarefa");
+const btnAddTarefa = document.getElementById("btn-add-tarefa");
 
 function desenharZonas(){
   listaZonas.innerHTML = "";
@@ -292,6 +294,23 @@ btnDesfazer.addEventListener("click", function () {
   painel.hidden = true;
 });
 
+btnAddTarefa.addEventListener("click", function (){
+  const texto = campoNovaTarefa.value.trim();
+
+  if (texto === "") {
+    alert("Qual é a tarefa?");
+    return;
+  }
+
+  if (tarefas.includes(texto)) {
+    alert("Essa tarefa já existe!!");
+    return;
+  }
+  tarefas.push(texto);
+  guardarListas();
+  guardarNoTelemovel();
+});
+
 // CHAMADAS FINAIS (sempre no fim, nesta ordem)
 carregarListas();
 carregarDoTelemovel();
@@ -299,4 +318,4 @@ desenharZonas();
 
 
 // arrumar a box de add o nome da nova zona
-// deixar a box de add zona, 
+// deixar a box de add zona, e add tarefa em algum outro lugar ou mais no topo porem juntos 
