@@ -89,6 +89,9 @@ function desenharZonas(){
         zonas = zonas.filter(function (z){
           return z !== zona;
         });
+
+        delete relatorio[zona];
+        guardarNoTelemovel();
         guardarListas();
         desenharZonas();
       });
@@ -294,6 +297,6 @@ carregarListas();
 carregarDoTelemovel();
 desenharZonas();
 
-// reparei que quando eu atualizo a pagina, ela perde a zona que eu add
+
 // arrumar a box de add o nome da nova zona
-// arrumar os botões de editar as zonas
+// deixar a box de add zona, 
