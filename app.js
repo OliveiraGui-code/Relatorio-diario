@@ -23,6 +23,7 @@ const btnCopiar = document.getElementById("btn-copiar");
 const textoRelatorio = document.getElementById("texto-relatorio");
 const btnWhatsapp = document.getElementById("btn-whatsapp");
 const btnLimpar = document.getElementById("btn-limpar");
+const btnDesfazer = document.getElementById("btn-desfazer")
 
 function desenharZonas(){
   listaZonas.innerHTML = "";
@@ -80,7 +81,7 @@ function desenharZonas(){
       const btnApagar = document.createElement("button");
       btnApagar.textContent = "✕";
 
-      // CORRIGIDO: o seu bloco do apagar agora está AQUI, dentro do desenharZonas
+      // o bloco do apagar agora está AQUI, dentro do desenharZonas
       btnApagar.addEventListener("click", function (){
         if (!confirm("apagar " + zona + " da lista?")){
           return;
@@ -271,6 +272,21 @@ btnEditar.addEventListener("click", function (){
     btnEditar.textContent = "Editar ✏️";
   }
   desenharZonas();
+});
+
+btnDesfazer.addEventListener("click", function () {
+  if (!relatorio[zonaAtual]) {
+    return;
+  }
+
+  if (!confirm("Tirar " + zonaAtual + " do relatório de hoje?")) {
+    return;
+  }
+
+  delete relatorio[zonaAtual];
+  guardarNoTelemovel();
+  desenharZonas();
+  painel.hidden = true;
 });
 
 // CHAMADAS FINAIS (sempre no fim, nesta ordem)
