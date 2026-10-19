@@ -63,7 +63,16 @@ function desenharZonas(){
               alert("Essa zona já existe!!");
                 return;
           }
-          console.log(nomeLimpo);
+          const posicao = zonas.indexOf(zona);
+          zonas[posicao] = nomeLimpo;
+
+          if (relatorio[zona]) {
+            relatorio[nomeLimpo] = relatorio[zona];
+            delete relatorio[zona];
+            guardarNoTelemovel();
+          }
+          guardarListas();
+          desenharZonas();
       });
 
       linha.appendChild(btnRenomear);
