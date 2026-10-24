@@ -26,6 +26,8 @@ const btnLimpar = document.getElementById("btn-limpar");
 const btnDesfazer = document.getElementById("btn-desfazer")
 const campoNovaTarefa = document.getElementById("nova-tarefa");
 const btnAddTarefa = document.getElementById("btn-add-tarefa");
+const listaGerirTarefas = document.getElementById("lista-gerir-tarefas");
+
 
 function desenharZonas(){
   listaZonas.innerHTML = "";
@@ -308,14 +310,46 @@ btnAddTarefa.addEventListener("click", function (){
   }
   tarefas.push(texto);
   guardarListas();
+  desenharTarefas();
   guardarNoTelemovel();
 });
+
+function desenharTarefas(){
+  listaGerirTarefas.innerHTML = "";
+
+  tarefas.forEach(function (tarefa){
+    const linha = document.createElement("div");
+    linha.className = "linha-zona";
+    
+    const nome = document.createElement("span");
+    nome.textContent = tarefa;
+
+    const btnApagar = document.createElement("button");
+    btnApagar.textContent = "✕";
+    btnApagar.addEventListener("click", function(){
+      if(!confirm("Apagar " + tarefa + "da lista?")){
+        return;
+      }
+      tarefas = tarefas.filter(function (t){
+        return t !== tarefa;
+      });
+      guardarListas();
+      desenharTarefas();
+    });
+
+      linha.appendChild(nome);
+      linha.appendChild(btnApagar);
+      listaGerirTarefas.appendChild(linha);
+  });
+}
 
 // CHAMADAS FINAIS (sempre no fim, nesta ordem)
 carregarListas();
 carregarDoTelemovel();
 desenharZonas();
+desenharTarefas();
 
 
 // arrumar a box de add o nome da nova zona
 // deixar a box de add zona, e add tarefa em algum outro lugar ou mais no topo porem juntos 
+// arrumar o botão de excluir tarefa 

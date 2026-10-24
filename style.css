@@ -66,3 +66,9 @@ overflow-y: auto;
 .linha-zona button:not(:first-child) {
   width: 44px;
 }
+
+.linha-zona span {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 16px;
+}
