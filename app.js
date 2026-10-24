@@ -311,7 +311,6 @@ btnAddTarefa.addEventListener("click", function (){
   tarefas.push(texto);
   guardarListas();
   desenharTarefas();
-  guardarNoTelemovel();
 });
 
 function desenharTarefas(){
@@ -340,6 +339,73 @@ function desenharTarefas(){
       linha.appendChild(nome);
       linha.appendChild(btnApagar);
       listaGerirTarefas.appendChild(linha);
+  });
+}
+
+function desenharTarefas() {
+  listaGerirTarefas.innerHTML = "";
+
+  tarefas.forEach(function (tarefa) {
+    const linha = document.createElement("div");
+    linha.className = "linha-zona";
+
+    const nome = document.createElement("span");
+    nome.textContent = tarefa;
+
+    const btnRenomear = document.createElement("button");
+    btnRenomear.textContent = "✏️";
+    btnRenomear.addEventListener("click", function () {
+      const novoNome = prompt("Novo nome para " + tarefa + ":", tarefa);
+
+      if (novoNome === null) {
+        return;
+      }
+
+      const nomeLimpo = novoNome.trim();
+
+      if (nomeLimpo === "" || nomeLimpo === tarefa) {
+        return;
+      }
+
+      if (tarefas.includes(nomeLimpo)) {
+        alert("Essa tarefa já existe!!");
+        return;
+      }
+
+      const posicao = tarefas.indexOf(tarefa);
+      tarefas[posicao] = nomeLimpo;
+
+      Object.keys(relatorio).forEach(function (nomeZona) {
+        const lista = relatorio[nomeZona].tarefas;
+        const i = lista.indexOf(tarefa);
+
+        if (i !== -1) {
+          lista[i] = nomeLimpo;
+        }
+      });
+
+      guardarNoTelemovel();
+      guardarListas();
+      desenharTarefas();
+    });
+
+    const btnApagar = document.createElement("button");
+    btnApagar.textContent = "✕";
+    btnApagar.addEventListener("click", function () {
+      if (!confirm("Apagar " + tarefa + " da lista?")) {
+        return;
+      }
+      tarefas = tarefas.filter(function (t) {
+        return t !== tarefa;
+      });
+      guardarListas();
+      desenharTarefas();
+    });
+
+    linha.appendChild(nome);
+    linha.appendChild(btnRenomear);
+    linha.appendChild(btnApagar);
+    listaGerirTarefas.appendChild(linha);
   });
 }
 
