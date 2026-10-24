@@ -310,7 +310,7 @@ btnAddTarefa.addEventListener("click", function (){
   }
   tarefas.push(texto);
   guardarListas();
-  desenharTarefas();
+  desenharTarefas();  
 });
 
 function desenharTarefas(){
