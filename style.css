@@ -18,11 +18,16 @@ body {
 }
 
 button {
-  display: block;
-  width: 100%;
-  padding: 14px;
+  background: linear-gradient(135deg, var(--azul), var(--azul-claro));
+  color: white;
+  border-radius: 12px;
+  padding: 10px 16px;
+  min-height: 44px;
   margin-bottom: 8px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
 }
 
 #painel-zona {
@@ -67,6 +72,10 @@ overflow-y: auto;
 #lista-zonas button {
   padding: 8px;
   font-size: 15px;
+  background: var(--fundo);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  box-shadow: none;
 }
 
 .linha-zona {
@@ -80,6 +89,7 @@ overflow-y: auto;
 
 .linha-zona button:not(:first-child) {
   width: 44px;
+  padding: 0;
 }
 
 .linha-zona span {
@@ -97,4 +107,27 @@ input, textarea {
 
 button, input, textarea {
   font-family: inherit;
+}
+
+.cartao {
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.cartao summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#btn-limpar {
+  background: var(--perigo);
+  box-shadow: none;
+}
+
+button:active {
+  transform: scale(0.97);
 }

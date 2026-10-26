@@ -415,7 +415,4 @@ carregarDoTelemovel();
 desenharZonas();
 desenharTarefas();
 
-
-// arrumar a box de add o nome da nova zona
-// deixar a box de add zona, e add tarefa em algum outro lugar ou mais no topo porem juntos 
-// arrumar o botão de excluir tarefa 
+ 

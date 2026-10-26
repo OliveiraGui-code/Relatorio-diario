@@ -11,37 +11,45 @@
 
 <body>
     <h1>Rota do dia</h1>
-        <div id="area-principal">
-        <div id="coluna-zonas">
-            <input type="text" id="nova-zona" placeholder="Nova zona">
-            <button id="btn-add-zona">Adicionar zona</button>
-            <h2>Zonas:</h2>
-            <button id="btn-editar">Editar</button>
-            <div id="lista-zonas"></div>
-        </div>
+    <details class="cartao">
+        <summary>＋ Adicionar zona ou tarefa</summary>
+        <input type="text" id="nova-zona" placeholder="Nova zona">
+        <button id="btn-add-zona">Adicionar zona</button>
+        <input type="text" id="nova-tarefa" placeholder="Nova tarefa">
+        <button id="btn-add-tarefa">Adicionar tarefa</button>
+    </details>
 
-            <div id="painel-zona" hidden>
-            <h2 id="titulo-zona"></h2>
-            <div id="lista-tarefas"></div>
-            <textarea id="observacao" placeholder="Observação (Opcional)"></textarea>
-            <button id="btn-guardar">Guardar</button>
-            <button id="btn-desfazer">Desazer zona</button>
-        </div>
+    <div id="area-principal">
+        <div id="coluna-zonas" class="cartao">
+        <h2>Zonas:</h2>
+        <button id="btn-editar">Editar</button>
+        <div id="lista-zonas"></div>
     </div>
 
-    <h2>Gerir tarefas</h2>
-    <div id="lista-gerir-tarefas"></div>
-    <input type="text" id="nova-tarefa" placeholder="Nova tarefa">
-    <button id="btn-add-tarefa">Adicionar tarefa</button>
+    <div id="painel-zona" class="cartao" hidden>
+        <h2 id="titulo-zona"></h2>
+        <div id="lista-tarefas"></div>
+        <textarea id="observacao" placeholder="Observação (Opcional)"></textarea>
+        <button id="btn-guardar">Guardar</button>
+        <button id="btn-desfazer">Desfazer zona</button>
+    </div>
+    </div>
 
-    <h2>Relatório</h2>
-    <button id="btn-gerar">Gerar relatório</button>
-    <textarea id="texto-relatorio" rows="10" placeholder="O relatório aparece aqui"></textarea>
-    <button id="btn-copiar">Copiar</button>
-    <button id="btn-whatsapp">Enviar por WhatsApp</button>
-    <button id="btn-limpar">Limpar dia</button>
+    <div class="cartao">
+        <h2>Gerir tarefas</h2>
+        <div id="lista-gerir-tarefas"></div>
+    </div>
 
-    <script src="app.js"></script>
+    <div class="cartao">
+        <h2>Relatório</h2>
+        <button id="btn-gerar">Gerar relatório</button>
+        <textarea id="texto-relatorio" rows="10" placeholder="O relatório aparece aqui"></textarea>
+        <button id="btn-copiar">Copiar</button>
+        <button id="btn-whatsapp">Enviar por WhatsApp</button>
+        <button id="btn-limpar">Limpar dia</button>
+    </div>
+
+<script src="app.js"></script>
 
 </body>
 </html>
