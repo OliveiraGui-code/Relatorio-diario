@@ -13,25 +13,31 @@
     <h1>Rota do dia</h1>
     <details class="cartao">
         <summary>＋ Adicionar zona ou tarefa</summary>
-        <input type="text" id="nova-zona" placeholder="Nova zona">
-        <button id="btn-add-zona">Adicionar zona</button>
-        <input type="text" id="nova-tarefa" placeholder="Nova tarefa">
-        <button id="btn-add-tarefa">Adicionar tarefa</button>
+         
+        <div class="campo-add">
+            <input type="text" id="nova-zona" placeholder="Nova zona">
+            <button id="btn-add-zona">Adicionar zona</button>
+        </div>
+
+        <div class="campo-add">
+            <input type="text" id="nova-tarefa" placeholder="Nova tarefa">
+            <button id="btn-add-tarefa">Adicionar tarefa</button>
+        </div>
     </details>
 
     <div id="area-principal">
         <div id="coluna-zonas" class="cartao">
-        <h2>Zonas:</h2>
-        <button id="btn-editar">Editar</button>
+            <h2>Zonas:</h2>
+            <button id="btn-editar">Editar</button>
         <div id="lista-zonas"></div>
     </div>
 
     <div id="painel-zona" class="cartao" hidden>
         <h2 id="titulo-zona"></h2>
-        <div id="lista-tarefas"></div>
-        <textarea id="observacao" placeholder="Observação (Opcional)"></textarea>
-        <button id="btn-guardar">Guardar</button>
-        <button id="btn-desfazer">Desfazer zona</button>
+            <div id="lista-tarefas"></div>
+            <textarea id="observacao" placeholder="Observação (Opcional)"></textarea>
+            <button id="btn-guardar">Guardar</button>
+            <button id="btn-desfazer">Desfazer zona</button>
     </div>
     </div>
 
@@ -44,12 +50,25 @@
         <h2>Relatório</h2>
         <button id="btn-gerar">Gerar relatório</button>
         <textarea id="texto-relatorio" rows="10" placeholder="O relatório aparece aqui"></textarea>
+
+    <div class="acoes">
         <button id="btn-copiar">Copiar</button>
         <button id="btn-whatsapp">Enviar por WhatsApp</button>
+    </div>
+
         <button id="btn-limpar">Limpar dia</button>
     </div>
 
 <script src="app.js"></script>
+
+<footer>
+    <p>Criado por: Guilherme Oliveira</p>
+    <p>
+        <a href="https://www.linkedin.com/in/guilherme-oliveira-log/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        ·
+        <a href="https://github.com/OliveiraGui-code/relatorio-diario" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+</footer>
 
 </body>
 </html>
