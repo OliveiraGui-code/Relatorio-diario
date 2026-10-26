@@ -1,5 +1,19 @@
+:root {
+  --fundo: #0f1626;
+  --cartao: #1a2338;
+  --borda: #2a3654;
+  --texto: #e8edf7;
+  --texto-suave: #9aa7c2;
+  --azul: #3b82f6;
+  --azul-claro: #5aa9ff;
+  --verde: #34d399;
+  --perigo: #ef4444;
+}
+
 body {
-  font-family: sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: "Poppins", sans-serif;
   padding: 16px;
 }
 
@@ -33,7 +47,8 @@ textarea {
 }
 
 button.feita {
-  background: #c8f7c5;
+  background: var(--verde);
+  color: #0f1626;
 }
 
 #area-principal {
@@ -71,4 +86,15 @@ overflow-y: auto;
   flex: 1;
   padding: 10px 0;
   font-size: 16px;
+}
+
+input, textarea {
+  background: var(--cartao);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+}
+
+button, input, textarea {
+  font-family: inherit;
 }
